@@ -94,12 +94,14 @@ class _NewContactsState extends State<NewContacts> {
                   });
                   if (phoneCheck==false && nameCheck==false) {
                     final _contact = ContactModel();
+                    _contact.phone = _phone.text.toString();
                     _contact.name = _name.text.trim();
                     _contact.company = _company_name.text==''?_company_name.text=' ':_company_name.text.trim();
                     await _middleware.saveContact(_contact);
                     setState(() {
                       _fetchData();
                     });
+                    Navigator.of(context).pop();
                   }
                 }, child: Text('Save',style: TextStyle(color: Colors.green.shade200,fontSize: 25),),style: TextButton.styleFrom(backgroundColor: Color.fromARGB(255, 100, 133, 194))),
               ],
