@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcontacts/database/crud.dart';
 import 'package:gcontacts/model/contact_model.dart';
 
@@ -12,15 +13,6 @@ class NewContacts extends StatefulWidget {
 }
 
 class _NewContactsState extends State<NewContacts> {
-  void _fetchData()async{
-    final _crud = CRUD();
-    var data=await _crud.getContacts('contacts');
-    setState(() {
-      list1 = data;
-    });
-    print(list1);
-  }
-  List<Map<String,dynamic>> list1=[];
   var _name = TextEditingController();
   var _phone = TextEditingController();
   var _company_name = TextEditingController();
@@ -28,12 +20,6 @@ class _NewContactsState extends State<NewContacts> {
   bool phoneCheck = false;
   bool comapanyCheck = false;
   final _middleware = Middleware();
-  @override
-  void initState() {
-    // TODO: implement initState
-    _fetchData();
-    super.initState();
-  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +29,7 @@ class _NewContactsState extends State<NewContacts> {
       body:Padding(padding: EdgeInsets.symmetric(horizontal: 10,vertical: 15),
         child: ListView(
           children: [
-            Text('$list1'),
+            // Text('$list1'),
             Icon(Icons.person,size: 55,),
             SizedBox(height: 20,),
             TextField(
@@ -98,9 +84,7 @@ class _NewContactsState extends State<NewContacts> {
                     _contact.name = _name.text.trim();
                     _contact.company = _company_name.text==''?_company_name.text=' ':_company_name.text.trim();
                     await _middleware.saveContact(_contact);
-                    setState(() {
-                      _fetchData();
-                    });
+                    Fluttertoast.showToast(msg: 'contact is saved');
                     Navigator.of(context).pop();
                   }
                 }, child: Text('Save',style: TextStyle(color: Colors.green.shade200,fontSize: 25),),style: TextButton.styleFrom(backgroundColor: Color.fromARGB(255, 100, 133, 194))),

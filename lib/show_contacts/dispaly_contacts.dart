@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gcontacts/calling/calling_screen.dart';
+import 'package:gcontacts/profile/profile_screen.dart';
 
 import '../contacts/add_contact.dart';
 import '../database/crud.dart';
@@ -20,6 +22,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
     });
     print(list1);
   }
+
   @override
   void setState(VoidCallback fn) {
     // TODO: implement setState
@@ -45,16 +48,59 @@ class _DisplayContactsState extends State<DisplayContacts> {
           style: TextStyle(fontSize: 25),
         ),
       ),
-      body: Center(
-        child: Text('$list1'),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.05, vertical: 15),
+        child: list1.length==0?Text('data is loading...'):ListView.builder(
+          itemBuilder: ((context, index) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_)=>ProfileScreen()));},
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    // height: MediaQuery.of(context).size.height*0.08,
+                    height: 70,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: Colors.blueGrey)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CircleAvatar(
+                          child: Icon(Icons.person),
+                        ),
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                '${list1[index]['name']}',
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                              Text('${list1[index]['phone']}')
+                            ],
+                          ),
+                        
+                       InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (_)=>CallingScreen()));},child: Icon(Icons.call),)
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                )
+              ],
+            );
+          }),
+          itemCount: list1.length,
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => NewContacts()));
-          setState(() {
-            _fetchData();
-          });
         },
         child: Icon(Icons.person_add_alt),
         backgroundColor: Colors.blueGrey,
