@@ -67,7 +67,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.05, vertical: 15),
         child: list1.length == 0
-            ? Text('No contacts...')
+            ? Text('No contacts...',style: TextStyle(fontSize: 20),)
             : results.length == 0 && search.toString().trim().isEmpty
                 ? ListView.builder(
                     itemBuilder: ((context, index) {
