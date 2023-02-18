@@ -25,7 +25,7 @@ class CRUD{
 
   getContacts(table)async{
     final _database = await db;
-    return _database.query(table);
+    return _database.query(table,orderBy: 'name');
   }
 
   getSingle(table,id)async{

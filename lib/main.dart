@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     WidgetsFlutterBinding.ensureInitialized();
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,        //it will hide the debug banner which is seen on top right
       home: DisplayContacts(),
     );
   }

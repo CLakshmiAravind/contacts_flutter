@@ -3,11 +3,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcontacts/database/crud.dart';
 import 'package:gcontacts/model/contact_model.dart';
 
-import '../middleware/middleware.dart';
-
 class NewContacts extends StatefulWidget {
-  NewContacts({super.key,required this.contact});
-  Map<String,dynamic> contact;
+  NewContacts({super.key, required this.contact});
+  Map<String, dynamic> contact;
   @override
   State<NewContacts> createState() => _NewContactsState();
 }
@@ -19,12 +17,11 @@ class _NewContactsState extends State<NewContacts> {
   bool nameCheck = false;
   bool phoneCheck = false;
   bool comapanyCheck = false;
-  final _middleware = Middleware();
   var _curd = CRUD();
   @override
   void initState() {
     // TODO: implement initState
-    if (widget.contact['id']!=null) {
+    if (widget.contact['id'] != null) {
       _name.text = widget.contact['name'];
       _phone.text = widget.contact['phone'].toString();
       _company_name.text = widget.contact['company'];
@@ -36,6 +33,7 @@ class _NewContactsState extends State<NewContacts> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.blueGrey,
           title: Text(
             'New Contact',
             style: TextStyle(
@@ -96,7 +94,9 @@ class _NewContactsState extends State<NewContacts> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextButton(
-                      onPressed: () {Navigator.of(context).pop();},
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                       child: Text(
                         'Discard',
                         style:
@@ -104,51 +104,60 @@ class _NewContactsState extends State<NewContacts> {
                       ),
                       style: TextButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 100, 133, 194))),
-                  widget.contact['id']!=null?
-                  TextButton(
-                      onPressed: () async {
-                        setState(() {
-                          _phone.text.trim().isEmpty
-                              ? phoneCheck = true
-                              : phoneCheck = false;
-                          _name.text.trim().isEmpty
-                              ? nameCheck = true
-                              : nameCheck = false;
-                        });
-                      await _curd.updateContact('contacts', {'id':widget.contact['id'],'name':_name.text,'phone':_phone.text,'company':_company_name.text});
-                      Fluttertoast.showToast(msg: 'contact is updated');
-                          Navigator.of(context).pop();
-                        },
-                        child: Text('update'),)
-                  :TextButton(
-                      onPressed: () async {
-                        setState(() {
-                          _phone.text.trim().isEmpty
-                              ? phoneCheck = true
-                              : phoneCheck = false;
-                          _name.text.trim().isEmpty
-                              ? nameCheck = true
-                              : nameCheck = false;
-                        });
-                        if (phoneCheck == false && nameCheck == false) {
-                          final _contact = ContactModel();
-                          _contact.phone = _phone.text.toString();
-                          _contact.name = _name.text.trim();
-                          _contact.company = _company_name.text == ''
-                              ? _company_name.text = '-'
-                              : _company_name.text.trim();
-                          await _middleware.saveContact(_contact);
-                          Fluttertoast.showToast(msg: 'contact is saved');
-                          Navigator.of(context).pop();
-                        }
-                      },
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                            color: Colors.green.shade200, fontSize: 25),
-                      ),
-                      style: TextButton.styleFrom(
-                          backgroundColor: Color.fromARGB(255, 100, 133, 194))),
+                  widget.contact['id'] != null
+                      ? TextButton(
+                        style: TextButton.styleFrom(
+                              backgroundColor:
+                                  Color.fromARGB(255, 100, 133, 194)),
+                          onPressed: () async {
+                            setState(() {
+                              _phone.text.trim().isEmpty
+                                  ? phoneCheck = true
+                                  : phoneCheck = false;
+                              _name.text.trim().isEmpty
+                                  ? nameCheck = true
+                                  : nameCheck = false;
+                            });
+                            await _curd.updateContact('contacts', {
+                              'id': widget.contact['id'],
+                              'name': _name.text,
+                              'phone': _phone.text,
+                              'company': _company_name.text
+                            });
+                            Fluttertoast.showToast(msg: 'contact is updated');
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('update',style: TextStyle(
+                                color: Colors.green.shade200, fontSize: 25)),
+                        )
+                      : TextButton(
+                          onPressed: () async {
+                            setState(() {
+                              _phone.text.trim().isEmpty
+                                  ? phoneCheck = true
+                                  : phoneCheck = false;
+                              _name.text.trim().isEmpty
+                                  ? nameCheck = true
+                                  : nameCheck = false;
+                            });
+                            if (phoneCheck == false && nameCheck == false) {
+                              await _curd.insertContact('contacts', {
+                                'name': _name.text,
+                                'phone': _phone.text,
+                                'company': _company_name.text
+                              });
+                              Fluttertoast.showToast(msg: 'contact is saved');
+                              Navigator.of(context).pop();
+                            }
+                          },
+                          child: Text(
+                            'Save',
+                            style: TextStyle(
+                                color: Colors.green.shade200, fontSize: 25),
+                          ),
+                          style: TextButton.styleFrom(
+                              backgroundColor:
+                                  Color.fromARGB(255, 100, 133, 194))),
                 ],
               )
             ],

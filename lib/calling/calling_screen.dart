@@ -23,6 +23,8 @@ class Dailing extends StatelessWidget {
             Text('$Name',style: TextStyle(fontSize: 25),),
             SizedBox(height: 15),
             Text('$phone',style: TextStyle(fontSize: 25),),
+            SizedBox(height: 15),
+            Text('calling...',style: TextStyle(fontSize: 15),),
             SizedBox(height: MediaQuery.of(context).size.height*0.4,),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
