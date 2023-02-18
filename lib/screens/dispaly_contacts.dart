@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gcontacts/calling/calling_screen.dart';
-import 'package:gcontacts/profile/profile_screen.dart';
-import '../contacts/add_contact.dart';
+import 'package:gcontacts/screens/calling_screen.dart';
+import 'package:gcontacts/screens/profile_screen.dart';
+import '../add_modify_contacts/new_edit_contact.dart';
 import '../database/crud.dart';
 
 class DisplayContacts extends StatefulWidget {

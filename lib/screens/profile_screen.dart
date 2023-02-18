@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gcontacts/calling/calling_screen.dart';
-import 'package:gcontacts/contacts/add_contact.dart';
+import 'package:gcontacts/screens/calling_screen.dart';
+import 'package:gcontacts/add_modify_contacts/new_edit_contact.dart';
 import 'package:gcontacts/database/crud.dart';
-import 'package:gcontacts/show_contacts/dispaly_contacts.dart';
+import 'package:gcontacts/screens/dispaly_contacts.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key, required this.contact});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gcontacts/database/crud.dart';
-import 'package:gcontacts/model/contact_model.dart';
+import 'package:gcontacts/database/contact_model.dart';
 
 class NewContacts extends StatefulWidget {
   NewContacts({super.key, required this.contact});
@@ -34,8 +34,14 @@ class _NewContactsState extends State<NewContacts> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.blueGrey,
-          title: Text(
+          title: widget.contact['id']==null?Text(
             'New Contact',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          )
+          :Text(
+            'Edit Contact',
             style: TextStyle(
               fontWeight: FontWeight.bold,
             ),
@@ -57,7 +63,7 @@ class _NewContactsState extends State<NewContacts> {
                 controller: _name,
                 decoration: InputDecoration(
                     hintText: "enter name",
-                    errorText: nameCheck ? 'name cannot be null' : null,
+                    errorText: nameCheck ? 'name cannot be empty' : null,
                     labelText: "Name",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
@@ -72,7 +78,7 @@ class _NewContactsState extends State<NewContacts> {
                     hintText: "enter phone number",
                     labelText: "phone",
                     errorText:
-                        phoneCheck ? 'phone number cannot be null' : null,
+                        phoneCheck ? 'phone number cannot be empty' : null,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15))),
               ),

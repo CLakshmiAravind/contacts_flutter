@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gcontacts/show_contacts/dispaly_contacts.dart';
+import 'package:gcontacts/screens/dispaly_contacts.dart';
 
 void main() {
   runApp(MyApp()
