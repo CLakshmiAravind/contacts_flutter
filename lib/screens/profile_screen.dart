@@ -90,7 +90,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ]),
       ),
       body: Container(
-          child: Column(
+          child: ListView(
         children: [
           Container(
             color: Colors.blueGrey,
