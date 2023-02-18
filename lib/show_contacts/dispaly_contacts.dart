@@ -83,7 +83,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
                             ],
                           ),
                         
-                       InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (_)=>CallingScreen(Name:list1[index]['name'],phone:list1[index]['phone'])));},child: Icon(Icons.call),)
+                       InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (_)=>Dailing(Name:list1[index]['name'],phone:list1[index]['phone'])));},child: Icon(Icons.call),)
                       ],
                     ),
                   ),

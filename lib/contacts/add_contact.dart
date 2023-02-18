@@ -20,6 +20,18 @@ class _NewContactsState extends State<NewContacts> {
   bool phoneCheck = false;
   bool comapanyCheck = false;
   final _middleware = Middleware();
+  var _curd = CRUD();
+  @override
+  void initState() {
+    // TODO: implement initState
+    if (widget.contact['id']!=null) {
+      _name.text = widget.contact['name'];
+      _phone.text = widget.contact['phone'].toString();
+      _company_name.text = widget.contact['company'];
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +104,23 @@ class _NewContactsState extends State<NewContacts> {
                       ),
                       style: TextButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 100, 133, 194))),
+                  widget.contact['id']!=null?
                   TextButton(
+                      onPressed: () async {
+                        setState(() {
+                          _phone.text.trim().isEmpty
+                              ? phoneCheck = true
+                              : phoneCheck = false;
+                          _name.text.trim().isEmpty
+                              ? nameCheck = true
+                              : nameCheck = false;
+                        });
+                      await _curd.updateContact('contacts', {'id':widget.contact['id'],'name':_name.text,'phone':_phone.text,'company':_company_name.text});
+                      Fluttertoast.showToast(msg: 'contact is updated');
+                          Navigator.of(context).pop();
+                        },
+                        child: Text('update'),)
+                  :TextButton(
                       onPressed: () async {
                         setState(() {
                           _phone.text.trim().isEmpty

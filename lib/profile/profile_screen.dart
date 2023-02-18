@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gcontacts/contacts/add_contact.dart';
 import 'package:gcontacts/contacts/delete_contact.dart';
 import 'package:gcontacts/database/crud.dart';
 import 'package:gcontacts/show_contacts/dispaly_contacts.dart';
@@ -58,10 +59,10 @@ Future<void> _showAlertDialog() async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.blueGrey,
         title: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
           InkWell(
-            onTap: (){},
+            onTap: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_)=>NewContacts(contact: widget.contact)));},
             child: Icon(
               Icons.edit,
               color: Colors.red,
@@ -77,7 +78,7 @@ Future<void> _showAlertDialog() async {
           child: Column(
         children: [
           Container(
-            color: Colors.black,
+            color: Colors.blueGrey,
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width * 1,
             child: Icon(
