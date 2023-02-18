@@ -57,7 +57,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 GestureDetector(
-                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_)=>ProfileScreen()));},
+                  onTap: () {Navigator.push(context, MaterialPageRoute(builder: (_)=>ProfileScreen(contact:list1[index])));},
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.9,
                     // height: MediaQuery.of(context).size.height*0.08,
@@ -83,7 +83,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
                             ],
                           ),
                         
-                       InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (_)=>CallingScreen()));},child: Icon(Icons.call),)
+                       InkWell(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (_)=>CallingScreen(Name:list1[index]['name'],phone:list1[index]['phone'])));},child: Icon(Icons.call),)
                       ],
                     ),
                   ),
@@ -100,7 +100,7 @@ class _DisplayContactsState extends State<DisplayContacts> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (_) => NewContacts()));
+              context, MaterialPageRoute(builder: (_) => NewContacts(contact: {},)));
         },
         child: Icon(Icons.person_add_alt),
         backgroundColor: Colors.blueGrey,
